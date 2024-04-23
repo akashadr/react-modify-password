@@ -1,23 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ChangePasswordPopup from "./ChangePasswordPopup";
 
 function App() {
+  const [changePasswordPopup, setChangePasswordPopup] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handlePasswordChange = (currentPassword, newPassword, confirmPassword) => {
+    console.log("Current Password:", currentPassword);
+    console.log("New Password:", newPassword);
+    console.log("Confirm Password:", confirmPassword);
+  };
+
+  const handleOpenChangePasswordPopup = () => {
+    setChangePasswordPopup(true);
+  };
+
+  const handleCloseChangePasswordPopup = () => {
+    setChangePasswordPopup(false);
+  };
+
+  const handleCancel = () => {
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    handleCloseChangePasswordPopup();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={handleOpenChangePasswordPopup}>Open Change Password Popup</button>
+      <ChangePasswordPopup
+        changePasswordPopup={changePasswordPopup}
+        onPasswordChange={handlePasswordChange}
+        onCancel={handleCancel}
+        setChangePasswordPopup={setChangePasswordPopup}
+        newPassword={newPassword}
+        setNewPassword={setNewPassword}
+        confirmPassword={confirmPassword}
+        setConfirmPassword={setConfirmPassword}
+        currentPassword={currentPassword}
+        setCurrentPassword={setCurrentPassword}
+      />
     </div>
   );
 }
