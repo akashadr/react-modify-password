@@ -3,7 +3,6 @@
   "version": "0.1.1",
   "license": "MIT",
   "private": false,
-  "type": "module",
   "babel": {
     "presets": [
       "@babel/preset-react"
