@@ -2,9 +2,10 @@
 
 This is a customizable popup interface designed for securely updating passwords in a React application.
 
-![](https://github.com/akashadr/react-modify-password/blob/main/assets/DefaultMode.png)
-![](https://github.com/akashadr/react-modify-password/blob/main/assets/LightMode.png)
-![](https://github.com/akashadr/react-modify-password/blob/main/assets/DarkMode.png)
+![Default Mode](https://github.com/akashadr/react-modify-password/blob/main/assets/DefaultMode_small.png =100x100)
+![Light Mode](https://github.com/akashadr/react-modify-password/blob/main/assets/LightMode_small.png =100x100)
+![Dark Mode](https://github.com/akashadr/react-modify-password/blob/main/assets/DarkMode_small.png =100x100)
+
 
 ## Installation
 
