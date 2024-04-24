@@ -25,6 +25,23 @@
     "type": "git",
     "url": "https://github.com/akashadr/react-modify-password"
   },
+  "keywords": [
+    "react",
+    "react component",
+    "change password",
+    "alter password",
+    "modify password",
+    "password modifier",
+    "password changer",
+    "modal",
+    "popup",
+    "customizable",
+    "current password",
+    "new password",
+    "confirm password",
+    "web",
+    "JavaScript"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
