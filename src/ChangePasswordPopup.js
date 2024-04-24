@@ -13,6 +13,17 @@ const ChangePasswordPopup = ({
   setConfirmPassword,
   currentPassword,
   setCurrentPassword,
+  modalStyle,
+  changePasswordTextStyle,
+  currentPasswordTextStyle,
+  newPasswordTextStyle,
+  confirmPasswordTextStyle,
+  currentPasswordInputStyle,
+  newPasswordInputStyle,
+  confirmPasswordInputStyle,
+  cancelButtonStyle,
+  updateButtonStyle,
+  errorMessageStyle
 }) => {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -24,7 +35,12 @@ const ChangePasswordPopup = ({
   useEffect(() => {
     const handleResize = () => {
       // Update the width based on screen width
-      const width = window.innerWidth < 800 ? window.innerWidth < 450 ? "80%" : "50%" : "30%";
+      const width =
+        window.innerWidth < 800
+          ? window.innerWidth < 450
+            ? "80%"
+            : "50%"
+          : "30%";
       setPopupWidth(width);
     };
 
@@ -43,23 +59,23 @@ const ChangePasswordPopup = ({
     const trimmedCurrentPassword = currentPassword.trim();
     const trimmedNewPassword = newPassword.trim();
     const trimmedConfirmPassword = confirmPassword.trim();
-  
+
     // Check if any password field is empty after trimming
-    if (trimmedCurrentPassword === '') {
+    if (trimmedCurrentPassword === "") {
       setError("Current Password cannot be empty!");
       return;
     }
-  
-    if (trimmedNewPassword === '') {
+
+    if (trimmedNewPassword === "") {
       setError("New Password cannot be empty!");
       return;
     }
-  
-    if (trimmedConfirmPassword === '') {
+
+    if (trimmedConfirmPassword === "") {
       setError("Confirm Password cannot be empty!");
       return;
     }
-  
+
     if (trimmedNewPassword === trimmedConfirmPassword) {
       onPasswordChange(currentPassword, newPassword, confirmPassword);
       setChangePasswordPopup(false);
@@ -71,7 +87,6 @@ const ChangePasswordPopup = ({
       setError("Passwords do not match!");
     }
   };
-  
 
   return (
     <Dialog
@@ -90,15 +105,63 @@ const ChangePasswordPopup = ({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
       }}
     >
-      <div style={{ backgroundColor: "white", width: popupWidth, height: "80%", borderRadius: "20px", boxShadow: focusedInput ? "0px 4px 10px rgba(0, 0, 0, 0.1)" : "none", padding: "20px", overflowY: "auto" }}>
-        <h2 style={{ color: "#36454F", textAlign: "center", fontSize: "24px", fontWeight: "600", marginBottom: "30px", opacity: 0.85 }}>Change Password</h2>
+      <div
+        style={{
+          backgroundColor: modalStyle?.backgroundColor || "white",
+          width: popupWidth,
+          height: "80%",
+          borderRadius: modalStyle?.borderRadius || "20px",
+          boxShadow: focusedInput
+            ? "0px 4px 10px rgba(0, 0, 0, 0.1)"
+            : "none",
+          padding: "20px",
+          overflowY: "auto",
+        }}
+      >
+        <h2
+          style={{
+            color: changePasswordTextStyle?.color || "#36454F",
+            textAlign: "center",
+            fontSize: changePasswordTextStyle?.fontSize || "24px",
+            fontWeight: changePasswordTextStyle?.fontWeight || "600",
+            marginBottom: "30px",
+            opacity: 0.85,
+          }}
+        >
+          Change Password
+        </h2>
         <div style={{ width: "90%", margin: "auto", marginBottom: "20px" }}>
-          <label htmlFor="currentPassword" style={{ display: "block", fontFamily: "Poppins", fontWeight: "normal", fontSize: "16px", color: "#4B4B4B", marginBottom: "10px" }}>Current Password</label>
+          <label
+            htmlFor="currentPassword"
+            style={{
+              display: "block",
+              fontFamily: "Poppins",
+              fontWeight: currentPasswordTextStyle?.fontWeight || "normal",
+              fontSize: currentPasswordTextStyle?.fontSize || "16px",
+              color: currentPasswordTextStyle?.color || "#4B4B4B",
+              marginBottom: "10px",
+            }}
+          >
+            Current Password
+          </label>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <input
               type={showCurrentPassword ? "text" : "password"}
               id="currentPassword"
-              style={{ flex: 1, marginTop: "5px", marginLeft: "5px", border: "1px solid #D1D5DB", borderRadius: "8px", padding: "8px", marginBottom: "20px", backgroundColor: "#FFFFFF", outline: "none", boxShadow: focusedInput === "current" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none", transition: "box-shadow 0.3s" }}
+              style={{
+                flex: 1,
+                marginTop: "5px",
+                marginLeft: "5px",
+                border: currentPasswordInputStyle?.border || "1px solid #D1D5DB",
+                borderRadius: currentPasswordInputStyle?.borderRadius || "8px",
+                padding: "8px",
+                marginBottom: "20px",
+                backgroundColor: currentPasswordInputStyle?.backgroundColor || "#FFFFFF",
+                color: currentPasswordInputStyle?.color || "#000000",
+                outline: "none",
+                boxShadow: focusedInput === "current" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none",
+                transition: "box-shadow 0.3s",
+              }}
               value={currentPassword}
               onFocus={() => setFocusedInput("current")}
               onBlur={() => setFocusedInput(null)}
@@ -119,13 +182,39 @@ const ChangePasswordPopup = ({
           </div>
         </div>
 
+        {/* New Password */}
         <div style={{ width: "90%", margin: "auto", marginBottom: "20px" }}>
-          <label htmlFor="newPassword" style={{ display: "block", fontFamily: "Poppins", fontWeight: "normal", fontSize: "16px", color: "#4B4B4B", marginBottom: "10px" }}>New Password</label>
+          <label
+            htmlFor="newPassword"
+            style={{
+              display: "block",
+              fontFamily: "Poppins",
+              fontWeight: newPasswordTextStyle?.fontWeight || "normal",
+              fontSize: newPasswordTextStyle?.fontSize || "16px",
+              color: newPasswordTextStyle?.color || "#4B4B4B",
+              marginBottom: "10px",
+            }}
+          >
+            New Password
+          </label>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <input
               type={showNewPassword ? "text" : "password"}
               id="newPassword"
-              style={{ flex: 1, marginTop: "5px", marginLeft: "5px", border: "1px solid #D1D5DB", borderRadius: "8px", padding: "8px", marginBottom: "20px", backgroundColor: "#FFFFFF", outline: "none", boxShadow: focusedInput === "new" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none", transition: "box-shadow 0.3s" }}
+              style={{
+                flex: 1,
+                marginTop: "5px",
+                marginLeft: "5px",
+                border: newPasswordInputStyle?.border || "1px solid #D1D5DB",
+                borderRadius: newPasswordInputStyle?.borderRadius || "8px",
+                padding: "8px",
+                marginBottom: "20px",
+                backgroundColor: newPasswordInputStyle?.backgroundColor || "#FFFFFF",
+                color: newPasswordInputStyle?.color || "#000000",
+                outline: "none",
+                boxShadow: focusedInput === "new" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none",
+                transition: "box-shadow 0.3s",
+              }}
               value={newPassword}
               onFocus={() => setFocusedInput("new")}
               onBlur={() => setFocusedInput(null)}
@@ -135,7 +224,7 @@ const ChangePasswordPopup = ({
               type="button"
               className="flex justify-end show-password items-center"
               onClick={() => setShowNewPassword(!showNewPassword)}
-              style={{ border: "none", background: "transparent", cursor: "pointer", marginBottom: 10  }}
+              style={{ border: "none", background: "transparent", cursor: "pointer", marginBottom: 10 }}
             >
               {showNewPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -146,13 +235,39 @@ const ChangePasswordPopup = ({
           </div>
         </div>
 
+        {/* Confirm Password */}
         <div style={{ width: "90%", margin: "auto", marginBottom: "20px" }}>
-          <label htmlFor="confirmPassword" style={{ display: "block", fontFamily: "Poppins", fontWeight: "normal", fontSize: "16px", color: "#4B4B4B", marginBottom: "10px" }}>Confirm Password</label>
+          <label
+            htmlFor="confirmPassword"
+            style={{
+              display: "block",
+              fontFamily: "Poppins",
+              fontWeight: confirmPasswordTextStyle?.fontWeight || "normal",
+              fontSize: confirmPasswordTextStyle?.fontSize || "16px",
+              color: confirmPasswordTextStyle?.color || "#4B4B4B",
+              marginBottom: "10px",
+            }}
+          >
+            Confirm Password
+          </label>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
-              style={{ flex: 1, marginTop: "5px", marginLeft: "5px", border: "1px solid #D1D5DB", borderRadius: "8px", padding: "8px", marginBottom: "20px", backgroundColor: "#FFFFFF", outline: "none", boxShadow: focusedInput === "confirm" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none", transition: "box-shadow 0.3s" }}
+              style={{
+                flex: 1,
+                marginTop: "5px",
+                marginLeft: "5px",
+                border: confirmPasswordInputStyle?.border || "1px solid #D1D5DB",
+                borderRadius: confirmPasswordInputStyle?.borderRadius || "8px",
+                padding: "8px",
+                marginBottom: "20px",
+                backgroundColor: confirmPasswordInputStyle?.backgroundColor || "#FFFFFF",
+                color: confirmPasswordInputStyle?.color || "#000000",
+                outline: "none",
+                boxShadow: focusedInput === "confirm" ? "0px 0px 0px 3px rgba(59, 130, 246, 0.05)" : "none",
+                transition: "box-shadow 0.3s",
+              }}
               value={confirmPassword}
               onFocus={() => setFocusedInput("confirm")}
               onBlur={() => setFocusedInput(null)}
@@ -162,7 +277,7 @@ const ChangePasswordPopup = ({
               type="button"
               className="flex justify-end show-password items-center"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              style={{ border: "none", background: "transparent", cursor: "pointer", marginBottom: 10  }}
+              style={{ border: "none", background: "transparent", cursor: "pointer", marginBottom: 10 }}
             >
               {showConfirmPassword ? (
                 <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
@@ -173,17 +288,49 @@ const ChangePasswordPopup = ({
           </div>
         </div>
 
-        {error && <p style={{ color: "red", textAlign: "center", marginBottom: "10px" }}>{error}</p>}
+        {/* Error Message */}
+        {error &&   <p
+          style={{
+            color: errorMessageStyle?.color || "red",
+            fontSize: errorMessageStyle?.fontSize || "16px",
+            fontWeight: errorMessageStyle?.fontWeight || "normal",
+            textAlign: "center",
+            marginBottom: "10px",
+          }}
+        >
+          {error}
+        </p>}
 
+        {/* Buttons */}
         <div style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}>
           <button
-            style={{ width: "127px", height: "48px", borderRadius: "16px", border: "1px solid #D0D4CA", backgroundColor: "#FFFFFF", color: "#4B4B4B", cursor: "pointer", padding: "10px 20px", marginRight: "10px" }}
+            style={{
+              width: "127px",
+              height: "48px",
+              borderRadius: cancelButtonStyle?.borderRadius || "16px",
+              border: cancelButtonStyle?.border || "1px solid #D0D4CA",
+              backgroundColor: cancelButtonStyle?.backgroundColor || "#FFFFFF",
+              color: cancelButtonStyle?.color || "#4B4B4B",
+              cursor: "pointer",
+              padding: "10px 20px",
+              marginRight: "10px",
+            }}
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            style={{ width: "127px", height: "48px", borderRadius: "16px", border: "1px solid #D0D4CA", backgroundColor: "#D0D4CA", color: "#4B4B4B", cursor: "pointer", padding: "10px 20px", marginRight: "10px" }}
+            style={{
+              width: "127px",
+              height: "48px",
+              borderRadius: updateButtonStyle?.borderRadius || "16px",
+              border: updateButtonStyle?.border || "1px solid #D0D4CA",
+              backgroundColor: updateButtonStyle?.backgroundColor || "#D0D4CA",
+              color: updateButtonStyle?.color || "#4B4B4B",
+              cursor: "pointer",
+              padding: "10px 20px",
+              marginRight: "10px",
+            }}
             onClick={handlePasswordChange}
           >
             Update
